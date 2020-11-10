@@ -4,7 +4,9 @@
 
 import Redis from 'ioredis';
 import { processWrapper } from './processWrapper';
+import logger from 'heroku-logger';
 
+logger.debug(`redis url is ${processWrapper.REDIS_URL}`);
 const redis = new Redis(processWrapper.REDIS_URL);
 
 const putFailedLead = async (lead) => {
