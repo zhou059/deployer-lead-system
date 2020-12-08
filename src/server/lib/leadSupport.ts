@@ -1,46 +1,71 @@
 // asynchronously posts the lead form back to org62
-import axios from 'axios';
-import querystring from 'querystring';
+import request from 'request-promise-native';
 
 import { processWrapper } from './processWrapper';
+import logger from 'heroku-logger';
 
-const sfdcLeadCaptureServlet = processWrapper.sfdcLeadCaptureServlet;
 const requestPage = '/form.html';
 const resultPage = '/conf.html';
 const requestHost = 'www.salesforce.com';
 
-const leadCreate = async function (incoming): Promise<void> {
+const auth = async () => {
+    const uri = `${
+        processWrapper.sfdcLeadCaptureServletAuth
+    }?grant_type=password&client_id=${encodeURIComponent(
+        processWrapper.sfdcLeadCaptureClientId
+    )}&client_secret=${encodeURIComponent(
+        processWrapper.sfdcLeadCaptureClientSecret
+    )}&username=${encodeURIComponent(
+        processWrapper.sfdcLeadCaptureUsername
+    )}&password=${encodeURIComponent(processWrapper.sfdcLeadCapturePassword)}`;
+    logger.debug(`auth url is ${uri}`);
+    const authResponse = await request.post(uri, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        proxy: processWrapper.FIXIE_URL,
+        json: true
+    });
+    console.log(authResponse);
+    return authResponse.access_token;
+};
+
+const leadCreate = async function (incoming, token: string): Promise<any> {
     const formPostBody = {
-        UserFirstName: incoming.UserFirstName,
-        UserLastName: incoming.UserLastName,
-        CompanyName: incoming.CompanyName,
-        UserTitle: incoming.UserTitle,
-        UserEmail: incoming.UserEmail,
-        UserPhone: incoming.UserPhone,
-        CompanyState: incoming.CompanyState,
-        CompanyPostalCode: incoming.CompanyPostalCode,
+        userFirstName: incoming.UserFirstName,
+        userLastName: incoming.UserLastName,
+        companyName: incoming.CompanyName,
+        userTitle: incoming.UserTitle,
+        userEmail: incoming.UserEmail,
+        userPhone: incoming.UserPhone,
+        companyState: incoming.CompanyState,
+        companyPostalCode: incoming.CompanyPostalCode,
         // CompanyEmployees: incoming.CompanyEmployees,
-        CompanyCountry: incoming.CompanyCountry,
+        companyCountry: incoming.CompanyCountry,
         mcloudFormName: incoming.mcloudFormName,
         // 'Lead.LeadSource': incoming['Lead.LeadSource'],
-        FormCampaignId: incoming.FormCampaignId,
-        DriverCampaignId: incoming.DriverCampaignId,
+        formCampaignId: incoming.FormCampaignId,
+        driverCampaignId: incoming.DriverCampaignId,
         requestPage,
         resultPage,
         requestHost
     };
 
-    await axios({
-        // strictSSL: false,
-        url: sfdcLeadCaptureServlet,
-        method: 'post',
-
-        headers: { 'content-type': 'application/x-www-form-urlencoded;charset=utf-8' },
-        data: querystring.stringify(formPostBody),
-        responseType: 'text'
+    logger.debug('lead to send is', formPostBody);
+    const result = await request.post(processWrapper.sfdcLeadCaptureServlet, {
+        auth: {
+            bearer: token
+        },
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formPostBody),
+        proxy: processWrapper.FIXIE_URL
+        // json: true
     });
 
-    // logger.debug(JSON.stringify(response));
+    console.log(result);
+    return result;
 };
 
-export { leadCreate };
+export { leadCreate, auth };
