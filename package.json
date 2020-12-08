@@ -22,9 +22,11 @@
     },
     "homepage": "https://github.com/mshanemc/deploy-to-sfdx#readme",
     "dependencies": {
-        "axios": "^0.20.0",
+        "@types/request": "^2.48.5",
+        "@types/request-promise-native": "^1.0.17",
         "heroku-logger": "^0.3.3",
-        "ioredis": "^4.6.2"
+        "ioredis": "^4.6.2",
+        "request-promise-native": "^1.0.9"
     },
     "devDependencies": {
         "@babel/core": "^7.3.4",

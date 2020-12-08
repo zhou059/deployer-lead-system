@@ -11,7 +11,7 @@
         "resolveJsonModule": true,
 
         "removeComments": true,
-        "types": ["node", "jest", "ioredis", "axios"]
+        "types": ["node", "jest", "ioredis"]
     }
     // "compileOnSave": true,
     // "include": ["./src/server/**"],
