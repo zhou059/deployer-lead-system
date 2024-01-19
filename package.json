@@ -2,7 +2,7 @@
     "name": "org62-lead-entry",
     "version": "0.0.1",
     "description": "pulls leads from queue, puts into org62",
-    "main": "./src/server/processes/trialLeadCreate.js",
+    "main": "lib/server/processes/trialLeadCreate.js",
     "scripts": {
         "build": "tsc -b ./src/server",
         "prettier": "prettier --write '**/*.{css,html,js,json,md,yaml,yml}'",
