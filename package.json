@@ -5,7 +5,7 @@
     "main": "lib/server/processes/trialLeadCreate.js",
     "scripts": {
         "build": "tsc -b ./src/server",
-        "start": "node lib/server/processes/trialLeadCreate.js",
+        "start": "node .",
         "prettier": "prettier --write '**/*.{css,html,js,json,md,yaml,yml}'",
         "test": "LOG_LEVEL=WARN jest -c src/server/__tests__/jest.config.unit.js",
         "test:watch": "LOG_LEVEL=WARN jest -c src/server/__tests__/jest.config.unit.js --watch",
