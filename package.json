@@ -6,7 +6,6 @@
     "scripts": {
         "build": "tsc -b ./src/server",
         "prettier": "prettier --write '**/*.{css,html,js,json,md,yaml,yml}'",
-        "start": "node ./lib/leadSupport.ts",
         "test": "LOG_LEVEL=WARN jest -c src/server/__tests__/jest.config.unit.js",
         "test:watch": "LOG_LEVEL=WARN jest -c src/server/__tests__/jest.config.unit.js --watch",
         "test:integration": "LOG_LEVEL=WARN jest -c src/server/__tests__/jest.config.integration.js",
