@@ -7,11 +7,12 @@ import { getLead, getLeadQueueSize, putFailedLead } from '../lib/redisNormal';
 import { leadCreate, auth } from '../lib/leadSupport';
 
 (async () => {
-    logger.debug('Lead queue consumer is up');
-    const token = await auth();
-    logger.debug(`access token is ${token}`);
-
+    
     while ((await getLeadQueueSize()) > 0) {
+        logger.debug('Lead queue consumer is up');
+        const token = await auth();
+        logger.debug(`access token is ${token}`);
+        
         const lead = await getLead();
         // const lead = sample; // sample used for local testing only
         try {
