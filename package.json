@@ -24,25 +24,10 @@
     "dependencies": {
         "@types/request": "^2.48.5",
         "@types/request-promise-native": "^1.0.17",
-        "ajv": "^6.12.3",
-        "ansi-regex": "^5.0.1",
-        "browserslist": "^4.16.5",
-        "glob-parent": "^5.1.2",
-        "got": "^11.8.5",
         "heroku-logger": "^0.3.3",
-        "hosted-git-info": "^2.8.9",
-        "ini": "^1.3.6",
         "ioredis": "^4.6.2",
-        "json-schema": "^0.4.0",
-        "lodash": "^4.17.21",
-        "node-notifier": "^8.0.1",
-        "normalize-url": "^4.5.1",
-        "path-parse": "^1.0.7",
         "request": "^2.88.2",
-        "request-promise-native": "^1.0.9",
-        "tmpl": "^1.0.5",
-        "ws": "^5.2.3",
-        "y18n": "^4.0.1"
+        "request-promise-native": "^1.0.9"
     },
     "devDependencies": {
         "@babel/core": "^7.3.4",
