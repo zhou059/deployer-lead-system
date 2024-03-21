@@ -47,6 +47,10 @@ const leadCreate = async function (incoming, token: string): Promise<any> {
         formCampaignId: incoming.FormCampaignId,
         driverCampaignId: incoming.DriverCampaignId,
         Web_Form_URL__c: incoming['Lead.Web_Form_URL__c'],
+        leadType: incoming.leadType,
+        primaryProductInterest: incoming.primaryProductInterest,
+        SignupEdition__c: incoming['SignupEdition__c'],
+        Trial_name__c: incoming['Trial_name__c'],
         requestPage,
         resultPage,
         requestHost
