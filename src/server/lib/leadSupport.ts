@@ -50,7 +50,9 @@ const leadCreate = async function (incoming, token: string): Promise<any> {
         leadType: incoming.leadType,
         primaryProductInterest: incoming.primaryProductInterest,
         SignupEdition__c: incoming['SignupEdition__c'],
-        Trial_name__c: incoming['Trial_name__c'],
+        Trial_Name__c: incoming['Trial_Name__c'],
+        Trial_Language__c: incoming['Trial_Language__c'],
+        Region__c: incoming['TrialRegion'],
         requestPage,
         resultPage,
         requestHost
